@@ -56,7 +56,7 @@ def vaccine_doses_route():
     for result in results:
         entry = result.__dict__
         entry.pop('_sa_instance_state',None)
-        date = str(entry['report_date'])
+        date = entry['report_date']
         date = date.strftime('%x')
         entry['report_date'] = date
         output[date] = entry
