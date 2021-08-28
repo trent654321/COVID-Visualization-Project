@@ -70,7 +70,8 @@ def confirmed_positive_cases_route():
         entry = result.__dict__
         entry.pop('_sa_instance_state',None)
         id = entry['id']
-        lat = 'rp'
+        entry['reporting_phu_latitude'] = str(entry['reporting_phu_latitude'])
+        entry['reporting_phu_longitude'] = str(entry['reporting_phu_longitude'])
         output[id] = entry
     return output
 
