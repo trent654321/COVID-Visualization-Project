@@ -23,7 +23,9 @@ Vaccines_by_age = Base.classes.vaccines_by_age
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    title = "COVID 19 Visualizations"
+    paragraph = "The future home of the main project page"
+    return render_template('index.html',title=title,paragraph=paragraph)
 
 @app.route('/vac_status_hosp_icu.json')
 def vac_status_hosp_icu_json():
@@ -105,4 +107,8 @@ def vaccines_by_age_json():
         output[date] = entry
     return output
 
-
+@app.route('/vax_visualizations')
+def vax_visualizations():
+    title = "Effects of Vaccination on COVID Outcomes"
+    paragraph = "The future home of the visualizations about the effects of the vaccine on covid outcomes"
+    return render_template('vax_visualizations.html',title=title,paragraph=paragraph)
