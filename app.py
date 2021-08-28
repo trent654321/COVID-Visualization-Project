@@ -3,8 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from config import database_URI
 from sqlalchemy.ext.automap import automap_base
 from datetime import datetime
+from flask import render_template
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
@@ -20,10 +23,10 @@ Vaccines_by_age = Base.classes.vaccines_by_age
 
 @app.route('/')
 def index():
-    return "Hello World!"
+    return render_template('index.html')
 
-@app.route('/vac_status_hosp_icu')
-def vac_status_hosp_icu_route():
+@app.route('/vac_status_hosp_icu.json')
+def vac_status_hosp_icu_json():
     results =db.session.query(Vac_status_hosp_icu).all()
     output = {}
     for result in results:
@@ -35,8 +38,8 @@ def vac_status_hosp_icu_route():
         output[date] = entry
     return output
 
-@app.route('/cases_by_vac_status')
-def cases_by_vac_status_route():
+@app.route('/cases_by_vac_status.json')
+def cases_by_vac_status_json():
     results =db.session.query(Cases_by_vac_status).all()
     print(results)
     output = {}
@@ -49,8 +52,8 @@ def cases_by_vac_status_route():
         output[date] = entry
     return output
 
-@app.route('/vaccine_doses')
-def vaccine_doses_route():
+@app.route('/vaccine_doses.json')
+def vaccine_doses_json():
     results =db.session.query(Vaccine_doses).all()
     output = {}
     for result in results:
@@ -62,8 +65,8 @@ def vaccine_doses_route():
         output[date] = entry
     return output
 
-@app.route('/confirmed_positive_cases')
-def confirmed_positive_cases_route():
+@app.route('/confirmed_positive_cases.json')
+def confirmed_positive_cases_json():
     results =db.session.query(Confirmed_positive_cases).all()
     output = {}
     for result in results:
@@ -76,8 +79,8 @@ def confirmed_positive_cases_route():
     return output
 
 
-@app.route('/vaccines_by_age_phu')
-def vaccines_by_age_phu_route():
+@app.route('/vaccines_by_age_phu.json')
+def vaccines_by_age_phu_json():
     results =db.session.query(Vaccines_by_age_phu).all()
     output = {}
     for result in results:
@@ -89,8 +92,8 @@ def vaccines_by_age_phu_route():
         output[date] = entry
     return output
 
-@app.route('/vaccines_by_age')
-def vaccines_by_age_route():
+@app.route('/vaccines_by_age.json')
+def vaccines_by_age_json():
     results =db.session.query(Vaccines_by_age).all()
     output = {}
     for result in results:
