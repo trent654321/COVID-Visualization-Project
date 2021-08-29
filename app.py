@@ -118,7 +118,7 @@ def vax_visualizations():
 def map_visualization():
     title = "COVID-19 Cases in Ontario by Health Unit"
     paragraph = "The future home of a chloropleth map"
-    return render_template('rachel_visuals.html',title=title,paragraph=paragraph)
+    return render_template('map_visuals.html',title=title,paragraph=paragraph)
 
 @app.route('/PHU_borders')
 def PHU_borders():
