@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from config import database_URI
 from sqlalchemy.ext.automap import automap_base
-from datetime import datetime
-from flask import render_template
+from datetime import datetime 
 from flask_cors import CORS
+import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -69,7 +69,7 @@ def vaccine_doses_json():
 
 @app.route('/confirmed_positive_cases.json')
 def confirmed_positive_cases_json():
-    results =db.session.query(Confirmed_positive_cases).all()
+    results =db.session.query(Confirmed_positive_cases).limit(100).all()
     output = {}
     for result in results:
         entry = result.__dict__
@@ -112,3 +112,18 @@ def vax_visualizations():
     title = "Effects of Vaccination on COVID Outcomes"
     paragraph = "The future home of the visualizations about the effects of the vaccine on covid outcomes"
     return render_template('vax_visualizations.html',title=title,paragraph=paragraph)
+
+
+@app.route('/map_visualization')
+def map_visualization():
+    title = "COVID-19 Cases in Ontario by Health Unit"
+    paragraph = "The future home of a chloropleth map"
+    return render_template('rachel_visuals.html',title=title,paragraph=paragraph)
+
+@app.route('/PHU_borders')
+def PHU_borders():
+    return requests.get("https://opendata.arcgis.com/datasets/c2fa5249b0c2404ea8132c051d934224_0.geojson").json()
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
