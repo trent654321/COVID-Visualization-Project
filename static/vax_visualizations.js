@@ -1,4 +1,19 @@
 var labels = ['Full','Partial','None','Unknown']
+d3.json("http://127.0.0.1:5000/vaccine_doses.json").then(function(data) {
+    var sumFull = 0;
+    //at least one minus full
+    var sumPartial = 0;
+    //total population of ontario minus at least one
+    var sumNone = 0;
+    var sumUnkown = 0;
+    var ontPop = 14789778;
+    var lastData = data['08/24/21'];
+    sumFull = lastData['total_individuals_fully_vaccinated'] 
+    sumPartial = lastData['total_individuals_at_least_one'] - lastData['total_individuals_fully_vaccinated']
+    sumNone = ontPop-lastData['total_individuals_at_least_one']
+    values = [sumFull,sumPartial,sumNone,sumUnkown]
+    makePie("total_population_pie_chart",values,labels,"Total Population by vaccination status")
+});
 d3.json("http://127.0.0.1:5000/vac_status_hosp_icu.json").then(function(data) {
     var sumFull = 0;
     var sumPartial = 0;
@@ -56,6 +71,3 @@ function makePie(divID,values,labels,title){
     Plotly.plot(div, data, layout);
 
 };
-
- 
-
