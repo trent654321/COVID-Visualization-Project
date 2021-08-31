@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
+{% block head %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
 {% block body %}
-<div>
-    <h3>The data should be printing in the console from the same spot where this line is generated.</h3>
-    <script src="/static/vax_visualizations.js"></script>
-</div>
+
+<div id="total_cases_pie_chart"></div>
+<div id="hospitalizations_pie_chart"></div>
+<div id="icu_pie_chart"></div>
+<script src="/static/vax_visualizations.js"></script>
 {% endblock %}

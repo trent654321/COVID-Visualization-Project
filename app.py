@@ -43,7 +43,6 @@ def vac_status_hosp_icu_json():
 @app.route('/cases_by_vac_status.json')
 def cases_by_vac_status_json():
     results =db.session.query(Cases_by_vac_status).all()
-    print(results)
     output = {}
     for result in results:
         entry = result.__dict__
