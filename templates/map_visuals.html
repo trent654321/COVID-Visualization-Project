@@ -1,8 +1,31 @@
 {% extends "layout.html" %}
 {% block body %}
-<div>
-    <h3>The data should be printing in the console from the same spot where this line is generated.</h3>
-    <script src="{{ url_for('static', filename = '/map_visuals.js') }}"></script>
 
+{% block head %}
+<!-- Leaflet CSS -->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+   
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    
+    <!-- Include Leaflet JavaScript file -->
+     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+     crossorigin=""></script>
+     
+{% endblock %}
+<head>
+    <script src="{{ url_for('static', filename = 'map_visuals.js') }}"></script>
+    <img src="/static/images/legend.jpg" alt="Legend"style="width:125px;height:150px;">
+    <div id="map"></div>
+    <div class="info"></div>
+</head>
+<div>
+    <h3> </h3>
+    <!-- My javascript to create the map -->
+    
+    
 </div>
 {% endblock %}
